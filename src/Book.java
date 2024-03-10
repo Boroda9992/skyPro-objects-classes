@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 /**
  * Класс, описывающий книгу.
  */
@@ -12,7 +14,8 @@ public class Book {
         this.yearPublished = yearPublished;
         this.author = author;
     }
-//SETTERS
+
+    //SETTERS
     public void setTitle(String title) {
         this.title = title;
     }
@@ -32,5 +35,29 @@ public class Book {
 
     public Author getAuthor() {
         return author;
+    }
+
+    @Override
+    public String toString() {
+        return "Название: " + title + " Автор: " + author + " Год публикации: " + yearPublished;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        //Если хэши не равны, то сравнивать дальше нет смысла.
+        //Сравниваю через неравенство, т.к. равенство хэшей - не всегда означает равенство объектов.
+        // Могут происходить коллизии, т.к. хэши выражаются числами в диапазоне значений int,
+        // который не может вместить, потенциально, бесконечные вариации значений хэш-кода.
+        if (this.hashCode() != o.hashCode()) return false;
+
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return yearPublished == book.yearPublished && Objects.equals(title, book.title) && Objects.equals(author, book.author);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, yearPublished, author);
     }
 }
