@@ -37,11 +37,20 @@ public class Book {
         return author;
     }
 
+    /**
+     * Метод возвращает конкатенацию параметров и строк, для читаемости.
+     * @return String
+     */
     @Override
     public String toString() {
         return "Название: " + title + " Автор: " + author + " Год публикации: " + yearPublished;
     }
 
+    /**
+     * Метод сначала проверяет неравенство хэш-кодов объектов, в остальном - действует стандартно.
+     * @param o
+     * @return boolean
+     */
     @Override
     public boolean equals(Object o) {
         //Если хэши не равны, то сравнивать дальше нет смысла.
